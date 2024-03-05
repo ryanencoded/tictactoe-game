@@ -5,5 +5,9 @@ node_modules/
 **/*.js
 
 # Ignore build directories
-packages/*/build/
+packages/backend/dist/
 packages/frontend/dist/
+
+#Ignore environment variables
+*.env
+.env
