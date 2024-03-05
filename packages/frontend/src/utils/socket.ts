@@ -4,7 +4,7 @@ let socket: Socket | null = null;
 
 export const initializeSocket = () => {
   if (!socket) {
-    socket = io('http://localhost:3001', {
+    socket = io(import.meta.env.VITE_WS_URL, {
       transports: ['websocket'],
       autoConnect: false
     });
