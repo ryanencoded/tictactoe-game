@@ -1,12 +1,21 @@
 import express from 'express';
+import { AppDataSource } from './data-source';
+import routes from "@routes/index";
 
-const app = express();
 const port = process.env.PORT || 3001;
+const app = express();
 
-app.get('/', (req, res) => {
-  res.send('Hello, Backend!');
-});
+AppDataSource.initialize()
+  .then(() => {
+    console.log("Data Source has been initialized!");
+    app.use(express.json())
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+    app.use('/api', routes);
+
+    app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
+    });
+  })
+  .catch((err) => {
+    console.error("Error during Data Source initialization:", err)
+  })
