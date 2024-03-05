@@ -4,15 +4,21 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node src/index.ts",
+    "dev": "ts-node -r tsconfig-paths/register src/index.ts",
     "lint": "eslint --ext .ts src",
-    "build": "tsc"
+    "build": "tsc",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "deploy:local:init": "dotenvx run -- docker-compose up -d",
+    "deploy:local:destroy": "dotenvx run -- docker-compose down"
   },
   "dependencies": {
     "@types/node": "^20.11.24",
     "dotenv": "^16.4.5",
     "express": "^4.18.3",
+    "pg": "^8.11.3",
+    "reflect-metadata": "^0.2.1",
     "ts-node": "^10.9.2",
+    "typeorm": "^0.3.20",
     "typescript": "^5.3.3"
   },
   "devDependencies": {
@@ -22,8 +28,11 @@
     "@typescript-eslint/parser": "^7.1.1",
     "eslint": "^8.0.1",
     "eslint-config-standard-with-typescript": "^43.0.1",
+    "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
-    "eslint-plugin-promise": "^6.0.0"
+    "eslint-plugin-prettier": "^5.1.3",
+    "eslint-plugin-promise": "^6.0.0",
+    "ts-node": "^10.9.2"
   }
 }

@@ -6,7 +6,17 @@
       "esModuleInterop": true,
       "skipLibCheck": true,
       "forceConsistentCasingInFileNames": true,
-      "outDir": "./dist"
+      "outDir": "./dist",
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "baseUrl": "./",
+      "paths": {
+        "@controllers/*": ["src/controllers/*"],
+        "@config/*": ["src/config/*"],
+        "@entities/*": ["src/entities/*"],
+        "@routes/*": ["src/routes/*"],
+        "@services/*": ["src/services/*"]
+      }
     },
     "include": ["src/**/*.ts"],
     "exclude": ["node_modules"]
