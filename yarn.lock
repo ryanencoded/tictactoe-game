@@ -5727,6 +5727,11 @@ thenify-all@^1.0.0:
   dependencies:
     any-promise "^1.0.0"
 
+tictactoe-game@^1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/tictactoe-game/-/tictactoe-game-1.4.3.tgz#a9f5212fed40ea454366c7b68e4cb49e3349f7eb"
+  integrity sha512-EbJ/VRtNQGwH8nZIP1nhPQFYBSMDhe8sw8SgziGI68M+Gx/vanpHfW5Ks7udk2fGdwwAAyj7jZ2P6V2SvhdFQw==
+
 tmp@^0.0.33:
   version "0.0.33"
   resolved "https://registry.yarnpkg.com/tmp/-/tmp-0.0.33.tgz#6d34335889768d21b2bcda0aa277ced3b1bfadf9"
