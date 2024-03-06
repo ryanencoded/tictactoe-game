@@ -1,8 +1,11 @@
 import { useEffect } from 'react'
 
+import { TicTacToeBoard } from '@components/TicTacToeBoard';
+import { CellValue, TicTacToe } from 'tictactoe-game';
 import { initializeSocket } from "@utils/socket";
 
 function App() {
+  const game = new TicTacToe();
   const socket = initializeSocket();
 
   useEffect(() => {
@@ -17,15 +20,19 @@ function App() {
     };
   }, [socket]);
 
+  const onMove = (state: CellValue[][]) => {
+    socket?.emit('player-move', state);
+  }
+
+  const onStart = () => {
+    // socket.connect();
+  }
+
   return (
-    <>
-      <h1>Tic Tac Toe</h1>
-      <div className="card">
-        <button onClick={() => socket.connect()}>
-          Connect
-        </button>
-      </div>
-    </>
+    <div className="max-w-sm rounded overflow-hidden shadow-lg p-4">
+      <h1 className="text-3xl font-bold my-4">Tic Tac Toe</h1>
+      <TicTacToeBoard game={game} onStart={onStart} onMove={onMove} />
+    </div>
   )
 }
 
