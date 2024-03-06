@@ -2,6 +2,8 @@
   "name": "tictactoe-game",
   "version": "1.0.0",
   "license": "MIT",
+  "main": "dist/TicTacToe.js",
+  "types": "dist/TicTacToe.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "jest"
