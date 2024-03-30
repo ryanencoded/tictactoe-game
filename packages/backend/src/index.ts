@@ -5,6 +5,7 @@ import { Server as SocketIoServer } from 'socket.io';
 
 import { AppDataSource } from './data-source';
 import routes from "@routes/index";
+import { initializeSocket } from '@config/socket';
 
 const port = process.env.PORT || 3001;
 const app = express();
@@ -24,21 +25,7 @@ AppDataSource.initialize()
 
     app.use('/api', routes);
 
-    io.on('connection', (socket) => {
-      console.log('WebSocket connection established');
-  
-      // Handle WebSocket messages
-      socket.on('message', (message) => {
-        console.log(`Received WebSocket message: ${message}`);
-        // Add your WebSocket message handling logic here
-      });
-  
-      // Handle WebSocket disconnection
-      socket.on('disconnect', () => {
-        console.log('WebSocket connection closed');
-        // Add any cleanup logic here
-      });
-    });
+    initializeSocket(io);
 
     server.listen(port, () => {
       console.log(`Server is running on port ${port}`);

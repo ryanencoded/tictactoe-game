@@ -5,9 +5,10 @@ interface TicTacToeBoardProps {
   game: TicTacToe;
   onMove: (state: CellValue[][]) => void;
   onStart: () => void;
+  isPlayerTurn: boolean;
 }
 
-export const TicTacToeBoard: React.FC<TicTacToeBoardProps> = ({ game, onMove, onStart }) => {
+export const TicTacToeBoard: React.FC<TicTacToeBoardProps> = ({ game, onMove, onStart, isPlayerTurn }) => {
   const [gameState, setGameState] = useState<CellValue[][]>(game.getGameState());
   const [gameResult, setGameResult] = useState<GameResult>(game.getGameResult());
 
@@ -16,8 +17,8 @@ export const TicTacToeBoard: React.FC<TicTacToeBoardProps> = ({ game, onMove, on
   }, [game]);
 
   const handleCellClick = (row: number, col: number) => {
-    // Return if game has a winner
-    if(gameResult.winner) return;
+    // Return if it's not the player's turn or if the game has a winner
+    if (!isPlayerTurn || gameResult.winner) return;
     // Make the move
     game.makeMove(row, col);
     // Obtain current state and result
@@ -41,24 +42,24 @@ export const TicTacToeBoard: React.FC<TicTacToeBoardProps> = ({ game, onMove, on
     onStart();
   }
 
-  if(gameResult.winner) {
+  if (gameResult.winner) {
     return (
       <div className="flex items-center justify-center flex-col">
         <h3 className="text-2xl my-4">{gameResult.winner} Wins!</h3>
-        <button 
-          className="bg-green-200 p-4 text-1xl font-bold cursor-pointer" 
+        <button
+          className="bg-green-200 p-4 text-1xl font-bold cursor-pointer"
           onClick={onPlayAgain}
         >Play Again</button>
       </div>
     )
   }
 
-  if(gameResult.draw) {
+  if (gameResult.draw) {
     return (
       <div className="flex items-center justify-center flex-col">
         <h3 className="text-2xl m-4">It's a draw!</h3>
-        <button 
-          className="bg-green-200 p-4 text-1xl font-bold cursor-pointer" 
+        <button
+          className="bg-green-200 p-4 text-1xl font-bold cursor-pointer"
           onClick={onPlayAgain}
         >Play Again</button>
       </div>
@@ -73,6 +74,7 @@ export const TicTacToeBoard: React.FC<TicTacToeBoardProps> = ({ game, onMove, on
             key={colIndex}
             className="bg-gray-200 p-4 text-4xl font-bold cursor-pointer flex items-center justify-center h-[4rem]"
             onClick={() => handleCellClick(rowIndex, colIndex)}
+            style={{ pointerEvents: isPlayerTurn ? 'auto' : 'none' }}
           >
             {cell === 'X' && <span className="text-blue-500">{cell}</span>}
             {cell === 'O' && <span className="text-red-500">{cell}</span>}
